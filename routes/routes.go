@@ -5,9 +5,9 @@ import "github.com/gin-gonic/gin"
 func RegisterRoutes(server *gin.Engine) {
 	// email
 	// VerifyEmail
-	server.POST("/email/verify")
+	server.POST("/email/verify", verifyEmail)
 	// SendEmail
-	server.POST("/email/send")
+	server.POST("/email/send", sendEmail)
 
 	// notification
 	// ListTopics
