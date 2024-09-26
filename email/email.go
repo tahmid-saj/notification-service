@@ -9,11 +9,15 @@ import (
 	"github.com/aws/aws-sdk-go/service/ses"
 )
 
-func VerifyEmail(sender string, recipient string) error {
+func VerifyEmail(sender string, recipient string) (string, error) {
 	sess, err := session.NewSession(&aws.Config{
 			Region: aws.String("ca-central-1"),
 		},
 	)
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
 
 	svc := ses.New(sess)
 
@@ -35,25 +39,25 @@ func VerifyEmail(sender string, recipient string) error {
 			}
 		} else {
 			fmt.Println(err.Error())
-			return err
+			return "", err
 		}
 	} else {
-		return err
+		return "", err
 	}
 	
-	fmt.Println("Verification sent to email address: " + recipient)
-	return nil
+	res := fmt.Sprint("Verification sent to email address: " + recipient)
+	return res, nil
 }
 
 func SendEmail(sender string, recipient string, subject string, 
-	htmlBody string, textBody string, charSet string) error {
+	htmlBody string, textBody string, charSet string) (string, error) {
 
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("ca-central-1"),
 	})
 	if err != nil {
 		fmt.Println(err)
-		return err
+		return "", err
 	}
 
 	svc := ses.New(sess)
@@ -98,15 +102,13 @@ func SendEmail(sender string, recipient string, subject string,
 			default:
 				fmt.Println(aerr.Error())
 			}
-	} else {
-		fmt.Println(err.Error())
-		return nil
-	}
-		return nil
+		} else {
+			fmt.Println(err.Error())
+			return "", err
+		}
+		return "", err
 	}
 
-	fmt.Println("Email sent to address: " + recipient)
-	fmt.Println(result)
-	
-	return nil
+	res := fmt.Sprint("Email sent to address: " + recipient, "\n", result)
+	return res, nil
 }
