@@ -1,13 +1,10 @@
 package main
 
 import (
-	// "notification-service/routes"
-	// "os"
+	"notification-service/routes"
+	"os"
 
-	// "github.com/gin-gonic/gin"
-	"fmt"
-	"notification-service/notification"
-
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -57,9 +54,9 @@ func main() {
 
 	godotenv.Load()
 
-	// server := gin.Default()
+	server := gin.Default()
 
-	// routes.RegisterRoutes(server)
+	routes.RegisterRoutes(server)
 
-	// server.Run(os.Getenv("PORT"))
+	server.Run(os.Getenv("PORT"))
 }
