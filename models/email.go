@@ -23,7 +23,7 @@ func VerifyEmail(emailVerificationInput *EmailVerificationInput) (*Response, err
 		return &Response{
 			Ok: false,
 			Response: false,
-		}, nil
+		}, err
 	}
 
 	return &Response{
@@ -39,7 +39,7 @@ func SendEmail(emailInput *EmailInput) (*Response, error) {
 		return &Response{
 			Ok: false,
 			Response: false,
-		}, nil
+		}, err
 	}
 
 	return &Response{
