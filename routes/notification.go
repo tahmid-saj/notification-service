@@ -19,9 +19,15 @@ func getTopics(context *gin.Context) {
 }
 
 func postCreateTopic(context *gin.Context) {
-	topicName := context.Param("topicName")
+	var topicInput models.TopicInput
 
-	resTopicCreated, err := models.CreateTopic(topicName)
+	err := context.ShouldBindJSON(&topicInput)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "could not parse request body"})
+		return
+	}
+
+	resTopicCreated, err := models.CreateTopic(topicInput.TopicName)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "could not create topic"})
 		return
@@ -46,7 +52,7 @@ func postSubscribeToTopic(context *gin.Context) {
 	topicARN := context.Param("topicARN")
 	var subscriptionInput models.SubscriptionInput
 
-	err := context.ShouldBindJSON(subscriptionInput)
+	err := context.ShouldBindJSON(&subscriptionInput)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "could not parse request body"})
 		return
@@ -70,7 +76,7 @@ func postPublishMessageToAllTopicSubscribers(context *gin.Context) {
 	topicARN := context.Param("topicARN")
 	var messageInput models.MessageInput
 
-	err := context.ShouldBindJSON(messageInput)
+	err := context.ShouldBindJSON(&messageInput)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "could not parse request body"})
 		return

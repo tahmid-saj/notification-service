@@ -13,11 +13,11 @@ func RegisterRoutes(server *gin.Engine) {
 	// ListTopics
 	server.GET("/topics", getTopics)
 	// CreateTopic
-	server.POST("/topics/:topicName", postCreateTopic)
+	server.POST("/topics", postCreateTopic)
 	// ListSubscriptions
 	server.GET("/topics/:topicARN", getTopicSubscriptions)
 	// SubscribeToTopic
-	server.POST("/topics/:topicARN", postSubscribeToTopic)
+	server.POST("/topics/:topicARN/subscribe", postSubscribeToTopic)
 	// PublishMessageToAllTopicSubscribers
 	server.POST("/topics/:topicARN/publish", postPublishMessageToAllTopicSubscribers)
 }

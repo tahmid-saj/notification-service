@@ -22,6 +22,10 @@ type MessageInput struct {
 	Message string `json:"message"`
 }
 
+type TopicInput struct {
+	TopicName string `json:"topicName"`
+}
+
 // notification
 func ListTopics() (*Response, error) {
 	topics, err := notification.ListTopics()
@@ -33,7 +37,7 @@ func ListTopics() (*Response, error) {
 	}
 
 	return &Response{
-		Ok: false,
+		Ok: true,
 		Response: topics,
 	}, nil
 }
@@ -48,7 +52,7 @@ func CreateTopic(topicName string) (*Response, error) {
 	}
 
 	return &Response{
-		Ok: false,
+		Ok: true,
 		Response: createdTopic,
 	}, nil
 }
@@ -63,7 +67,7 @@ func ListSubscriptions(topicARN string) (*Response, error) {
 	}
 
 	return &Response{
-		Ok: false,
+		Ok: true,
 		Response: subscriptions,
 	}, nil
 }
@@ -78,7 +82,7 @@ func SubscribeToTopic(subscriptionInput Subscription) (*Response, error) {
 	}
 
 	return &Response{
-		Ok: false,
+		Ok: true,
 		Response: subscription,
 	}, nil
 }
@@ -93,7 +97,7 @@ func PublishMessageToAllTopicSubscribers(publishMessageInput PublishMessage) (*R
 	}
 
 	return &Response{
-		Ok: false,
+		Ok: true,
 		Response: publishedMessage,
 	}, nil
 }
