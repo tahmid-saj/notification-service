@@ -9,6 +9,29 @@ Pub/Sub based notification service API for sending email and mobile push notific
 
 The directory structure is as follows:
 
+## Directory Structure
+
+- **conf/**  
+  - Configuration files for the service.
+  
+- **email/**  
+  - Handlers and configurations for email notifications using AWS SES.
+
+- **models/**  
+  - Data models for the notification service.
+
+- **notification/**  
+  - Core logic for sending notifications.
+
+- **routes/**  
+  - API route definitions for the notification service.
+
+- **utils/**  
+  - Utility functions used across the service.
+
+- `main.go`: Entry point of the Go-based notification service.
+- `go.mod` & `go.sum`: Dependency management files.
+
 <br/>
 <br/>
 
