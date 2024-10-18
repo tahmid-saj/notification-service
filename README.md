@@ -9,8 +9,6 @@ Pub/Sub based notification service API for sending email and mobile push notific
 
 The directory structure is as follows:
 
-## Directory Structure
-
 - **conf/**  
   - Configuration files for the service.
   
